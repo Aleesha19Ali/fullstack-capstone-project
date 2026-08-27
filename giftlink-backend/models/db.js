@@ -1,7 +1,12 @@
+// db.js
 require('dotenv').config();
 const MongoClient = require('mongodb').MongoClient;
 
-let url = `${process.env.MONGO_URL}`;
+// Fix: check process.env.MONGO_URL properly without template literal
+let url = process.env.MONGO_URL && process.env.MONGO_URL !== 'undefined' 
+    ? process.env.MONGO_URL 
+    : "mongodb://127.0.0.1:27017";
+
 let dbInstance = null;
 const dbName = "giftdb";
 
